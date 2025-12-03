@@ -30,13 +30,6 @@ Kako uporabiti
 ```bash
 python train.py   --data_dir path/data   --output_dir_models path/save/models   --output_dir_processed path/save/processed_data   --output_dir_scalers path/save/scalers   --stations station1 station2   --window_size 24   --step_size 1   --missing_rate 0.10
 ```
-`train.py` v repoju naj bi naredil:
-- branje CSV-jev iz `--data_dir`
-- razdelitev na train/val/test
-- fit `StandardScaler` na train set (shranjen v `--output_dir_scalers`)
-- ustvarjanje drsnih oken s podanim `--window_size` in `--step_size`
-- naključno maskiranje (če želite) validacijskega seta
-- treniranje modelov in shranjevanje `*.pth` v `--output_dir_models`
 
 2. Imputacija z že natreniranim modelom
 ```python
