@@ -2,51 +2,20 @@
 
 Kratek opis
 -----------
-Projekt vsebuje preprosto in reproducibilno cevovodje za imputacijo manjkajočih vrednosti v časovnih vrstah z uporabo prilagojenega Transformer modela. Namenjen je raziskavam in hitrim prototipom — priprava podatkov, učenje modela in izvajanje imputacije.
+Projekt vsebuje model in učno zanko namenjeno zapolnjevanju manjkajočih vrednosti v časovnih vrstah z uporabo Transformer modela.
 
-Kaj morate prenesti / namestiti
+Za delovanje potrebujemo
 -------------------------------
-- Python 3.9 ali novejši (priporočeno 3.9–3.11)
-- GPU z nameščenim CUDA (opcijsko, priporočeno za hitrejše učenje)
-- Namestite odvisnosti (primer `requirements.txt` spodaj)
-
-Primarna Python knjižnica (priporočeno v `requirements.txt`):
-```
-torch
-numpy
-pandas
-scikit-learn
-joblib
-matplotlib
-pygrinder  # (če uporabljate MCAR masker iz repozitorija)
-```
-
-Hitri koraki za namestitev
--------------------------
-```bash
-git clone <repo-url>
-cd <repo>
-python -m venv .venv
-source .venv/bin/activate        # Linux / macOS
-# .venv\Scripts\activate      # Windows (PowerShell)
-pip install -r requirements.txt
-```
-
-Struktura repozitorija
-----------------------
-- `Transformer_model.py` — definicija TransformerImputer razreda (model, trening, validacija, impute metoda)
-- `train.py` — skripta za pripravo podatkov, skaliranje, ustvarjanje drsnih oken in zagon treninga
-- `support.py` — konfiguracije modelov in pomožne funkcije (npr. `create_sliding_windows`)
-- `processed_data/` — izhod: train/val/test CSV-ji (per postaja)
-- `scalers/` — shranjeni `StandardScaler` objekti (`scaler.pkl`)
-- `models/` — shranjene uteži modela (`*.pth`)
+- Python 3.9 ali novejši
+- GPU z nameščenim CUDA
+- Odvisnosti so navedene v `requirements.txt`
 
 Format vhodnih podatkov
 -----------------------
 - En CSV na postajo (npr. `station1.csv`) z vsaj:
   - stolpec `datetime` (parsable kot datum/čas)
   - enega ali več vrednostnih stolpcev (npr. `feature1`, `pm10`, ...)
-- Primer (prvi stolpci):
+- Primer:
 ```
 datetime,feature1,feature2
 2020-01-01 00:00:00,12.3,4.5
@@ -54,7 +23,7 @@ datetime,feature1,feature2
 ...
 ```
 
-Kako uporabiti (primeri)
+Kako uporabiti
 ------------------------
 
 1. Priprava podatkov in učenje (primer):
@@ -101,16 +70,8 @@ imputed_unscaled = scaler.inverse_transform(imputed.reshape(-1, imputed.shape[-1
 Nasveti in opombe
 -----------------
 - Pri inferenci bodite pozorni na obliko podatkov (`(N, T, F)`).
-- Shrani `scaler.pkl` vsake postaje — potreben je za povrnitev v originalno skalo.
 - Če uporabljate GPU, preverite, da `torch.cuda.is_available()` in da naložite model z `map_location='cuda'` ali premaknete tenzorje na `device`.
 - Če v modelu nastopijo NaN vrednosti pri imputaciji — preverite vhodne maske in da so vse NaN nadomeščene z 0 pred napovedjo (model pričakuje posebne maske).
 - Prilagodite `batch_size`, `epochs` in `learning rate` glede na razpoložljivost strojne opreme.
 
-Licenca
--------
-Projekt lahko licencirate pod MIT licenco (ali drugo po izbiri).
-
-Kontakt / prispevanje
----------------------
-Če želite prispevati ali imate vprašanja, odprite `issue` ali pošljite pull request. Dodajte kratke, reproducibilne spremembe in testni primer.
 
