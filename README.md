@@ -50,7 +50,7 @@ datetime,feature1,feature2
 
 ### 1. Priprava podatkov in učenje
 
-**POMEMBNO:** Pred zagonom v datoteki `train.py` uredite:
+**POMEMBNO:** Pred zagonom v datoteki moramo urediti `train.py`:
 
 ```python
 data_dir = 'path/data'
@@ -74,7 +74,7 @@ python train.py
 
 ---
 
-### 2. Imputacija z že natreniranim modelom
+### 2. Imputacija z natreniranim modelom
 
 ```python
 import joblib
@@ -178,8 +178,3 @@ Model vključuje več optimizacij:
 - predpomnjenje diagonalne attention maske
 - TF32 in cuDNN optimizacije
 - gradient clipping
-
-
-
-
-
