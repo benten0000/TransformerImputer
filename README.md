@@ -45,12 +45,11 @@ config = ...  # ista konfiguracija kot pri treningu
 model = TransformerImputer(config)
 model.load_state_dict(torch.load("path/save/models/transformer/station1/your_model.pth", map_location="cpu"))
 
-# pripravi podatke (na primer iz CSV)
+# priprava podatkov
 # predpostavimo, da imamo N x F polje 'data' (nenormalizirano)
 data_scaled = scaler.transform(data)
 windows = create_sliding_windows(data_scaled, window_size=24, step=1, n_features=data.shape[1])
 
-# vstavi NaN v windows tam, kjer želite imputirati, nato:
 dataset = {"X": windows}
 imputed = model.impute(dataset)  # vrne numpy array v skalirani skali
 
