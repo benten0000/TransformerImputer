@@ -184,7 +184,7 @@ Model vključuje več optimizacij:
 ## Komponente modela
 
 ### `RotaryPositionalEncoding`
-Rotacijske pozicijske vgraditve.
+Rotacijsko pozicijsko kodiranje.
 
 ### `SelfAttention`
 Multi-head attention z:
@@ -198,10 +198,5 @@ Vključuje metode:
 - `impute()` – imputacija  
 - `number_of_params()` – štetje parametrov  
 
----
 
-## Opombe
-- Model najbolje deluje z GPU (CUDA)  
-- Pri validaciji se uporablja MAE na umetno zamaskiranih podatkih  
-- Early stopping spremlja validacijsko izgubo  
 
