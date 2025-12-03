@@ -179,24 +179,7 @@ Model vključuje več optimizacij:
 - TF32 in cuDNN optimizacije
 - gradient clipping
 
----
 
-## Komponente modela
-
-### `RotaryPositionalEncoding`
-Rotacijsko pozicijsko kodiranje.
-
-### `SelfAttention`
-Multi-head attention z:
-- RoPE kodiranjem
-- diagonal masking  
-- flash attention optimizacijo
-
-### `TransformerImputer`
-Vključuje metode:
-- `fit()` – učenje  
-- `impute()` – imputacija  
-- `number_of_params()` – štetje parametrov  
 
 
 
