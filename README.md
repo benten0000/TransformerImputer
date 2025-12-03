@@ -38,7 +38,7 @@ python train.py   --data_dir path/data   --output_dir_models path/save/models   
 - naključno maskiranje (če želite) validacijskega seta
 - treniranje modelov in shranjevanje `*.pth` v `--output_dir_models`
 
-2. Imputacija z že natreniranim modelom (kratka Python skripta)
+2. Imputacija z že natreniranim modelom
 ```python
 import joblib
 import numpy as np
@@ -67,11 +67,5 @@ imputed = model.impute(dataset)  # vrne numpy array v skalirani skali
 imputed_unscaled = scaler.inverse_transform(imputed.reshape(-1, imputed.shape[-1])).reshape(imputed.shape)
 ```
 
-Nasveti in opombe
------------------
-- Pri inferenci bodite pozorni na obliko podatkov (`(N, T, F)`).
-- Če uporabljate GPU, preverite, da `torch.cuda.is_available()` in da naložite model z `map_location='cuda'` ali premaknete tenzorje na `device`.
-- Če v modelu nastopijo NaN vrednosti pri imputaciji — preverite vhodne maske in da so vse NaN nadomeščene z 0 pred napovedjo (model pričakuje posebne maske).
-- Prilagodite `batch_size`, `epochs` in `learning rate` glede na razpoložljivost strojne opreme.
 
 
